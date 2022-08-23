@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	<!-- myBatis 연결 +보안! 연결정보를 따로 파일(db.properties)에 저장 -->
+	<!-- 1.정보 읽기 (src/main/java 여기를 classpath라고 함)-->
+	<util:properties id="db" location="classpath:db.properties"></util:properties>
+	<!-- 2.정보를 모아서 mybatis로 전송 : BasicDataSource가 데이터베이스 연결 정보를 다 갖고있음! -->
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+	 p:driverClassName="#{db['driver']}"
+	 p:url="#{db['url']}"
+	 p:username="#{db['username']}"
+	 p:password="#{db['password']}"
+	/>
+	<!-- 3.myBatis = SqlSessionFactoryBean이 받아서 연결과 해제를 만든다 -->
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+	 p:dataSource-ref="ds"
+	 p:configLocation="classpath:Config.xml"
+	/>
+	<!-- 4.ssf정보를 DAO에 전송 (DAO에서 SqlSessionDaoSupport 상속받아놔야 함)-->
+	<bean id="dao" class="doodoo.dev.di.MovieDAO"
+	 p:sqlSessionFactory-ref="ssf"
+	/>
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<!-- 
+사용자 정의 클래스 : 어노테이션(개별/나눠서 사용하는 부분)
+라이브러리 클래스 : XML(공통으로 사용하는 부분)
+-->
+	<context:component-scan base-package="doodoo.dev.xmlanno"/>
+<!-- 
+***없는건 아직 안배워서 설정 못함
+1. AOP 적용
+***2. 사용자 정의 클래스 등록
+***3. DataSource 설정
+4. 트랜잭션 적용
+***5. MyBatis, JPA 등록
+6. 보안
+7. WebSocket
+ -->
+	<!-- myBatis 연결 +보안! 연결정보를 따로 파일(db.properties)에 저장 -->
+	<!-- 1.정보 읽기 (src/main/java 여기를 classpath라고 함)-->
+	<util:properties id="db" location="classpath:db.properties"></util:properties>
+	<!-- 2.정보를 모아서 mybatis로 전송 : BasicDataSource가 데이터베이스 연결 정보를 다 갖고있음! -->
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+	 p:driverClassName="#{db['driver']}"
+	 p:url="#{db['url']}"
+	 p:username="#{db['username']}"
+	 p:password="#{db['password']}"
+	/>
+	<!-- 3.myBatis = SqlSessionFactoryBean이 받아서 연결과 해제를 만든다 -->
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+	 p:dataSource-ref="ds"
+	 p:configLocation="classpath:Config.xml"
+	/>
+</beans>
