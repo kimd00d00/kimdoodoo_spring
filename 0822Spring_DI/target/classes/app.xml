@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="e1" class="doodoo.dev.web.EmpVO">
+		<!-- 멤버변수의 값을 채운 후에 메모리 할당 (=초기화) -->
+		<property name="empno"><value>1</value></property>
+		<!-- e1.setEmpno(1)과 같은 역할을 한다. -->
+		<property name="name"><value>김두두</value></property>
+		<property name="dept"><value>개발부</value></property>
+		<property name="job"><value>신입</value></property>
+		<property name="loc"><value>서울</value></property>
+	</bean>
+	<!-- 이렇게 해도 된다 -->
+	<bean id="e2" class="doodoo.dev.web.EmpVO">
+		<property name="empno" value="2"/>
+		<property name="name" value="김루이"/>
+		<property name="dept" value="개발부"/>
+		<property name="job" value="팀장"/>
+		<property name="loc" value="서울"/>
+	</bean>
+	<!-- 이렇게 해도 된다(2) -->
+	<bean id="e3" class="doodoo.dev.web.EmpVO"
+		p:empno="3"
+		p:name="김두둥"
+		p:dept="개발부"
+		p:job="인턴"
+		p:loc="서울"
+	/>
+</beans>

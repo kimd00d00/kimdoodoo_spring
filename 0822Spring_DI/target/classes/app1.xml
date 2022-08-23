@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="mem1" class="doodoo.dev.spring.Member">
+	<!-- 디폴트 생성자 호출할 때 쓰는거라서... 이대로는 오류가 날 것이다. 아래처럼 추가해야함-->
+		<constructor-arg index="0"><value>1</value></constructor-arg>
+		<constructor-arg index="1"><value>김두두</value></constructor-arg>
+		<constructor-arg index="2"><value>서울</value></constructor-arg>
+	</bean>
+	<bean id="mem2" class="doodoo.dev.spring.Member"
+		c:mno="2"
+		c:name="김루이"
+		c:addr="서울"/>
+	<bean id="mem3" class="doodoo.dev.spring.Member"
+		c:_00="3"
+		c:_01="김두둥"
+		c:_02="서울"
+	/>
+</beans>

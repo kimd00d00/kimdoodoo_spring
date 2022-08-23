@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="e" class="doodoo.dev.spring.Emp"
+		p:empno="1"
+		p:name="kim"
+		p:dept="dev"
+	/>
+</beans>
