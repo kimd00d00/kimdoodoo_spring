@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="dao" class="com.sist.web.EmpDAO" scope="prototype"
+	c:driver="oracle.jdbc.driver.OracleDriver"
+	p:url="jdbc:oracle:thin:@localhost:1521:XE"
+	p:username="hr"
+	p:password="happy"
+	></bean>
+	<!-- 값 = 생성자(매개변수)에 값을 채우는게 c, setter/getter로 값을 채우는걸 p -->
+	<!-- scope:prototype 하면 싱글톤 아님 -->
+</beans>

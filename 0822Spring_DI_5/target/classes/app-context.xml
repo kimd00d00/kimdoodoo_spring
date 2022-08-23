@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<context:component-scan base-package="doodoo.dev.*"/>
+	<!-- 
+	선택적 구분자 
+	 @Component : 일반 클래스(MainClass, ~Manager)
+	 @Repository : 저장소(~DAO)
+	 @Service : DAO 여러개를 묶어서관리 -> 댓글, 게시판기능 등
+	 @Controller : Model 클래스(페이지 제어, JSP를 어디로 이동할건지 등)
+	 @RestController : Model 클래스(자바스크립트 제어) -> JSON,XML,일반 문자열
+	 @ControllerAdvice : 통합 예외처리
+	 @Configuration : XML없이 자바로 클래스 등록
+	 -->
+</beans>
