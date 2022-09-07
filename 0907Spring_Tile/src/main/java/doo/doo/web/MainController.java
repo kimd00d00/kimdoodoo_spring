@@ -21,4 +21,4 @@ public class MainController {
 	public String admin_main() {
 		return "admin/main/list";
 	}
-}
+} 
