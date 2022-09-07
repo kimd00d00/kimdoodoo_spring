@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="doodoo.dev.main.movie-mapper">
+	<select id="movieListData" resultType="MovieVO">
+		SELECT mno, title, genre, grade, director, actor, rownum
+		FROM (SELECT mno, title, genre, grade, director, actor
+		FROM project_movie ORDER BY mno ASC)
+		WHERE rownum&lt;=50
+	</select>
+	<select id="movieFindData" resultType="MovieVO" parameterType="String">
+		SELECT mno, title, genre, actor, director
+		FROM project_movie
+		WHERE 
+		<!-- 
+		WHERE title LIKE '%'||#{s}||'%'
+		WHERE genre LIKE '%'||#{s}||'%'
+		WHERE actor LIKE '%'||#{s}||'%'
+
+		WHERE title LIKE '%'||#{s}||'%' OR genre LIKE '%'||#{s}||'%'
+		WHERE title LIKE '%'||#{s}||'%' OR actor LIKE '%'||#{s}||'%' ...등을 모두 한번에 처리할 수 있도록!!!
+		
+		PrefixOverrides="OR" : 맨 앞에 붙은 OR는 제거하라는 뜻.
+		
+		String[] fsArr={"T","G","A"};이런 식으로 검색 옵션을 넣어줄 것이다.
+		 -->
+		<trim prefix="(" suffix=")" prefixOverrides="OR">
+			<foreach collection="fsArr" item="fd">
+				<trim prefix="OR">
+					<choose><!-- char로 받아오면 숫자형으로 변환되므로 미리 String으로 변환한다. -->
+						<when test="fd=='T'.toString()">title LIKE '%'||#{ss}||'%'</when>
+						<when test="fd=='G'.toString()">genre LIKE '%'||#{ss}||'%'</when>
+						<when test="fd=='A'.toString()">actor LIKE '%'||#{ss}||'%'</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</select>
+</mapper>
