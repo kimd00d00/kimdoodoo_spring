@@ -33,4 +33,8 @@ public interface FoodMapper {
 	@Select("SELECT CEIL(COUNT(*)/12.0) FROM food_location "
 			+ "WHERE address LIKE '%'||#{address}||'%'")
 	public int foodLocationTotalPage(String address);
+	
+	@Select("SELECT fno, name, poster, address, score, tel, type, time, parking, menu, price "
+			+ "FROM food_location WHERE fno=#{fno}")
+	public FoodVO foodDetailVueData(int fno);
 }

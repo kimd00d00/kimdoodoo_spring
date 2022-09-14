@@ -67,7 +67,12 @@ public class FoodController {
 	
 	@GetMapping("food/food_find_vue.do")
 	public String food_find_vue() {
-		
 		return "food/food_find_vue";
+	}
+	
+	@GetMapping("food/food_detail_vue.do")
+	public String food_detail_vue(int fno, Model model) {
+		model.addAttribute("fno",fno);
+		return "food/food_detail_vue";
 	}
 }

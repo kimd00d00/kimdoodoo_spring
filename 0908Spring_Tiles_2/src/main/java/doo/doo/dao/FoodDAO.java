@@ -31,4 +31,8 @@ public class FoodDAO {
 	public int foodLocationTotalPage(String address) {
 		return mapper.foodLocationTotalPage(address);
 	}
+	
+	public FoodVO foodDetailVueData(int fno) {
+		return mapper.foodDetailVueData(fno);
+	}
 }

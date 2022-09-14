@@ -52,4 +52,29 @@ public class FoodRestController {
 		return result;
 	}
 	
+	@GetMapping(value="food/detail_vue.do", produces="text/plain;charset=UTF-8")
+	public String detail_vue(int fno) {
+		String result = "";
+		try {
+			FoodVO vo = service.foodDetailVueData(fno);
+			JSONObject obj = new JSONObject();
+			obj.put("fno",vo.getFno());
+//			obj.put("score",vo.getScore());
+			obj.put("name",vo.getName());
+			obj.put("poster",vo.getPoster());
+			obj.put("address",vo.getAddress());
+			obj.put("tel",vo.getTel());
+			obj.put("type",vo.getType());
+			obj.put("time",vo.getTime());
+			obj.put("parking",vo.getParking());
+			obj.put("price",vo.getPrice());
+			obj.put("menu",vo.getMenu());
+			
+			result = obj.toJSONString();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
+	
 }

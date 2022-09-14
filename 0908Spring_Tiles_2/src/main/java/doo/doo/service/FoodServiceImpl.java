@@ -41,4 +41,9 @@ public class FoodServiceImpl implements FoodService{
 		return dao.foodLocationTotalPage(address);
 	}
 
+	@Override
+	public FoodVO foodDetailVueData(int fno) {
+		return dao.foodDetailVueData(fno);
+	}
+
 }
