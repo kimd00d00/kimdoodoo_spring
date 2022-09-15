@@ -20,7 +20,7 @@ public class FoodRestController {
 			if(page==null)
 				page="1";
 			if(ss==null)
-				ss="∞≠≥≤";
+				ss="ÔøΩÔøΩÔøΩÔøΩ";
 			int curpage = Integer.parseInt(page);
 			Map map = new HashMap();
 			int rowsize = 12;
@@ -33,10 +33,10 @@ public class FoodRestController {
 			List<FoodVO> list = service.foodFindData(map);
 			int totalpage = service.foodLocationTotalPage(ss);
 			
-			JSONArray arr = new JSONArray(); //List∏¶ JSON¿∏∑Œ ∫Ø∞Ê
+			JSONArray arr = new JSONArray(); //ListÎ•º JSONÏúºÎ°ú Î≥ÄÍ≤Ω
 			int k=0;
 			for(FoodVO vo:list) {
-				JSONObject obj = new JSONObject(); //{"no":1,"name":"kim"} ¿Ã∑∏∞‘ µ 
+				JSONObject obj = new JSONObject(); //{"no":1,"name":"kim"} Ïù¥Î†áÍ≤å Îê®
 				obj.put("fno",vo.getFno());
 				obj.put("name",vo.getName());
 				obj.put("poster",vo.getPoster().substring(0,vo.getPoster().indexOf("^")));

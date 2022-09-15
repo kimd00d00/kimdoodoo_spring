@@ -24,7 +24,7 @@ public class ReplyController {
 		vo.setId(id);
 		vo.setName(name);
 		dao.replyInsert(vo);
-		//RedirectAttributes : redirectÇÏ¸é¼­ µ¥ÀÌÅÍ¸¦ ³Ñ±æ ¶§ »ç¿ëÇÔ
+		//RedirectAttributes : redirectí•˜ë©´ì„œ ë°ì´í„°ë¥¼ ë„˜ê¸¸ ë•Œ ì‚¬ìš©í•¨
 		ra.addAttribute("tab", vo.getType());
 		ra.addAttribute("no",vo.getCno());
 		return "redirect:../seoul/detail.do";

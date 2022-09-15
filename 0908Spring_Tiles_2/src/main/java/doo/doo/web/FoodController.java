@@ -12,7 +12,7 @@ import doo.doo.vo.*;
 
 @Controller
 public class FoodController {
-	//»ç¿ëÀÚÀÇ ¿äÃ»(¿ä±¸»çÇ×) = Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ ¼­¹ö°¡ ¿äÃ»À» ¹Ş´Â °÷Àº ÁÖ¼ÒÃ¢ÀÌ´Ù! ±×·¡¼­ ÁÖ¼Ò·Î ´Ù Ã£´Â°ÍÀÓ.
+	//ì‚¬ìš©ìì˜ ìš”ì²­(ìš”êµ¬ì‚¬í•­) = í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° ì„œë²„ê°€ ìš”ì²­ì„ ë°›ëŠ” ê³³ì€ ì£¼ì†Œì°½ì´ë‹¤! ê·¸ë˜ì„œ ì£¼ì†Œë¡œ ë‹¤ ì°¾ëŠ”ê²ƒì„.
 	@Autowired
 	private FoodService service;
 	@Autowired
@@ -43,7 +43,7 @@ public class FoodController {
 	@RequestMapping("food/food_find.do")
 	public String food_find(String page, String ss, Model model) {
 		if(ss==null)
-			ss = "°­³²";
+			ss = "ê°•ë‚¨";
 		if(page==null)
 			page = "1";
 		

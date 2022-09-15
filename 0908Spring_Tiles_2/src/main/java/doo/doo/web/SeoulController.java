@@ -45,9 +45,9 @@ public class SeoulController {
 		map.put("no",no);
 		SeoulVO vo = service.seoulDetailData(map);
 		model.addAttribute("vo",vo);
-		model.addAttribute("tab",tab); //±¸ºĞÀ» À§ÇØ ¶Ç Àü¼ÛÇØ ÁØ´Ù
+		model.addAttribute("tab",tab); //êµ¬ë¶„ì„ ìœ„í•´ ë˜ ì „ì†¡í•´ ì¤€ë‹¤
 		
-		//´ñ±Û Ãâ·Â
+		//ëŒ“ê¸€ ì¶œë ¥
 		ReplyVO rvo = new ReplyVO();
 		rvo.setCno(no);
 		rvo.setType(tab);

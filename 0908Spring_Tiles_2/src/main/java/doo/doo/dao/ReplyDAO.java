@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReplyDAO {
 	private Connection conn;
-	private CallableStatement cs; //ÇÁ·Î½ÃÀú È£ÃâÇÒ ¶§ ¾¸
+	private CallableStatement cs; //í”„ë¡œì‹œì € í˜¸ì¶œí•  ë•Œ ã…… ã…ìš©
 	private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	
 	public ReplyDAO() {
@@ -32,7 +32,7 @@ public class ReplyDAO {
 		}catch(Exception ex) {}
 	}
 	
-	//´ñ±Û ¿Ã¸®±â
+	//ëŒ“ê¸€ ì…ë ¥
 	/*CREATE OR REPLACE PROCEDURE replyInsert (
 	    pCno spring_reply2.cno%TYPE,
 	    pType spring_reply2.type%TYPE,
@@ -57,7 +57,7 @@ public class ReplyDAO {
 			disConnection();
 		}
 	}
-	//´ñ±Û ÀĞ±â
+	//ëŒ“ê¸€ ëª©ë¡ ì¶œë ¥
 	/*CREATE OR REPLACE PROCEDURE replyListData(
 	    pCno spring_reply2.cno%TYPE,
 	    pType spring_reply2.type%TYPE,
@@ -71,7 +71,7 @@ public class ReplyDAO {
 			cs = conn.prepareCall(sql);
 			cs.setInt(1, vo.getCno());
 			cs.setInt(2, vo.getType());
-			cs.registerOutParameter(3, OracleTypes.CURSOR);//°á°ú°ªÀ» ´ã¾ÆÁÜ
+			cs.registerOutParameter(3, OracleTypes.CURSOR);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			cs.executeQuery();
 			ResultSet rs = (ResultSet)cs.getObject(3);
 			while(rs.next()) {
