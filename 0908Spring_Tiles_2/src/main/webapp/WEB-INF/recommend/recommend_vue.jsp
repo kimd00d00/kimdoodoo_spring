@@ -42,7 +42,7 @@ new Vue({
 					 type:no
 				 }
 			 }).then(result=>{
-				 this.menu_data=result.data
+				 this.menu_data=result.data 
 			 })
 		 }
 	 }
