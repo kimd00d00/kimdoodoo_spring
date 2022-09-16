@@ -25,6 +25,7 @@
 	        </ul>
 	      </li>
 	      <li><a href="../recipe/list.do">레시피</a></li>
+	      <li><a href="../board/list.do">게시판</a></li>
 	      <li><a href="../chat/chat.do">채팅</a></li>
 	      <li><a href="../recommend/recommend.do">맛집 추천(Ajax)</a></li>
 	      <li><a href="../recommend/recommend_vue.do">맛집 추천(Vue)</a></li>

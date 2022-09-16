@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-//∞¯≈Î¿∏∑Œ ¿˚øÎ«œ¥¬ øπø‹ √≥∏Æ
+//Í≥µÌÜµÏúºÎ°ú Ï†ÅÏö©ÌïòÎäî ÏòàÏô∏ Ï≤òÎ¶¨
 //Runtime -> NullPointer, numberformat, classcast
 //SQL
 //IO
@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CommonsException {
 	@ExceptionHandler(RuntimeException.class)
 	public void runtimeException(RuntimeException ex) {
-		System.out.println("RUNTIME EXCEPTION πﬂª˝!");
+		System.out.println("RUNTIME EXCEPTION Î∞úÏÉù!");
 		ex.printStackTrace();
 	}
 	@ExceptionHandler(SQLException.class)
 	public void sqlException(SQLException ex) {
-		System.out.println("SQL EXCEPTION πﬂª˝!");
+		System.out.println("SQL EXCEPTION Î∞úÏÉù!");
 		ex.printStackTrace();
 	}
 	@ExceptionHandler(IOException.class)
 	public void ioException(IOException ex) {
-		System.out.println("IO EXCEPTION πﬂª˝!");
+		System.out.println("IO EXCEPTION Î∞úÏÉù!");
 		ex.printStackTrace();
 	}
 	@ExceptionHandler(Exception.class)
 	public void exception(Exception ex) {
-		System.out.println("EXCEPTION πﬂª˝!");
+		System.out.println("EXCEPTION Î∞úÏÉù!");
 		ex.printStackTrace();
 	}
 }
