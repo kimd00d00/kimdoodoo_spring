@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
+
+import doo.doo.dao.FoodDAO;
 import doo.doo.service.*;
 import doo.doo.vo.*;
 @RestController
 public class FoodRestController {
 	@Autowired
 	private FoodService service;
+	@Autowired
+	private FoodDAO dao;
 	
 	@GetMapping(value="food/food_find_vue.do", produces="text/plain;charset=UTF-8")
 	public String food_find(String ss, String page) {
@@ -20,7 +24,7 @@ public class FoodRestController {
 			if(page==null)
 				page="1";
 			if(ss==null)
-				ss="����";
+				ss="강남";
 			int curpage = Integer.parseInt(page);
 			Map map = new HashMap();
 			int rowsize = 12;
@@ -59,10 +63,10 @@ public class FoodRestController {
 			FoodVO vo = service.foodDetailVueData(fno);
 			JSONObject obj = new JSONObject();
 			obj.put("fno",vo.getFno());
-//			obj.put("score",vo.getScore());
+			obj.put("score",vo.getScore());
 			obj.put("name",vo.getName());
 			obj.put("poster",vo.getPoster());
-			obj.put("address",vo.getAddress());
+			obj.put("address",vo.getAddress().substring(0,vo.getAddress().lastIndexOf("지")).trim());
 			obj.put("tel",vo.getTel());
 			obj.put("type",vo.getType());
 			obj.put("time",vo.getTime());
@@ -77,4 +81,39 @@ public class FoodRestController {
 		return result;
 	}
 	
+	@GetMapping(value="food/food_all_vue.do",produces="text/plain;charset=UTF-8")
+	public String food_all_vue(String page) {
+		String result="";
+		try {
+			if(page==null)
+				page="1";
+			int curpage = Integer.parseInt(page);
+			Map map = new HashMap();
+			int rowsize = 12;
+			int start = rowsize*curpage - (rowsize-1);
+			int end = rowsize*curpage;
+			map.put("start",start);
+			map.put("end",end);
+			
+			List<FoodVO> list = dao.foodAllData(map);
+			int totalpage = dao.foodTotalPage();
+			
+			JSONArray arr = new JSONArray(); //List를 JSON으로 변경
+			int k=0;
+			for(FoodVO vo:list) {
+				JSONObject obj = new JSONObject(); //{"no":1,"name":"kim"} 이렇게 됨
+				obj.put("fno",vo.getFno());
+				obj.put("name",vo.getName());
+				obj.put("poster",vo.getPoster().substring(0,vo.getPoster().indexOf("^")));
+				if(k==0) {
+					obj.put("curpage",curpage);
+					obj.put("totalpage",totalpage);
+				}
+				arr.add(obj);
+				k++;
+			}
+			result = arr.toJSONString();
+		}catch(Exception ex) {}
+		return result;
+	}
 }
