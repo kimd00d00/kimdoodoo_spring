@@ -22,4 +22,16 @@ public class MemberDAO {
 	public MemberVO memberJoinInfoData(String id) {
 		return mapper.memberJoinInfoData(id);
 	}
+	
+	public String memberGetPassword(String id) {
+		return mapper.memberGetPassword(id);
+	}
+	
+	public MemberVO memberUpdateData(String id) {
+		return mapper.memberUpdateData(id);
+	}
+	
+	public void memberUpdate(MemberVO vo) {
+		mapper.memberUpdate(vo);
+	}
 }

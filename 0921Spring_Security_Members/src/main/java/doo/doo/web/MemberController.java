@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import doo.doo.vo.*;
@@ -62,7 +64,7 @@ public class MemberController {
 	
 	@PostMapping("member/login_ok")
 	@ResponseBody
-	public String member_login_ok(String id, String pwd, HttpSession session) {
+	public String member_login_ok(String id, String pwd, Boolean ck, HttpSession session, HttpServletResponse response) {
 		String result = "";
 		int count = dao.memberIdCheck(id);
 		if(count==0) {
@@ -74,6 +76,23 @@ public class MemberController {
 				session.setAttribute("id", id);
 				session.setAttribute("name", vo.getName());
 				session.setAttribute("role", vo.getRole());
+				if(ck==true) {
+					//쿠키 저장
+					Cookie cookie = new Cookie("id",id);
+					cookie.setPath("/");
+					cookie.setMaxAge(60*60*24);
+					response.addCookie(cookie);
+					///////////////////////////////
+					cookie = new Cookie("name",vo.getName());
+					cookie.setPath("/");
+					cookie.setMaxAge(60*60*24);
+					response.addCookie(cookie);
+					//////////////////////////////
+					cookie = new Cookie("role",vo.getRole());
+					cookie.setPath("/");
+					cookie.setMaxAge(60*60*24);
+					response.addCookie(cookie);
+				}
 				result = "OK";
 			}else {
 				result="NOPWD";
@@ -85,6 +104,44 @@ public class MemberController {
 	@GetMapping("member/logout.do")
 	public String member_logout(HttpSession session) {
 		session.invalidate();
+		return "redirect:../main/main.do";
+	}
+	
+	@GetMapping("member/join_before.do")
+	public String member_join_before(Model model) {
+		model.addAttribute("main_jsp","../member/join_before.jsp");
+		return "main/main";
+	}
+	
+	@GetMapping("member/join_before_ok.do")
+	@ResponseBody
+	public String member_join_before_ok(String pwd, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		String result = "";
+		String db_pwd = dao.memberGetPassword(id);
+		if(encoder.matches(pwd, db_pwd)) {
+			result = "yes";
+		}else {
+			result = "no";
+		}
+		return result;
+	}
+	
+	@GetMapping("member/join_update.do")
+	public String member_join_update(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		MemberVO vo = dao.memberUpdateData(id);
+		model.addAttribute("vo",vo);
+		model.addAttribute("main_jsp","../member/join_update.jsp");
+		return "main/main";
+	}
+	
+	@PostMapping("member/join_update_ok.do")
+	public String member_update(MemberVO vo, HttpSession session) {
+		String tel = "010-"+vo.getTel1()+"-"+vo.getTel2();
+		vo.setTel(tel);
+		dao.memberUpdate(vo);
+		session.setAttribute("name", vo.getName());
 		return "redirect:../main/main.do";
 	}
 }

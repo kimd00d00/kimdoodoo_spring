@@ -25,10 +25,11 @@ $(function(){
 			$('#pwd').focus();
 			return;
 		}
+		let ck = $('#ck').is(":checked");
 		$.ajax({
 			type:'post',
 			url:'../member/login_ok.do',
-			data:{"id":id, "pwd":pwd},
+			data:{"id":id, "pwd":pwd, "ck":ck},
 			success:function(result){
 				let res = result.trim();
 				if(res==='NOID'){
@@ -57,7 +58,7 @@ $(function(){
 				<tr>
 					<th width="35%">ID</th>
 					<td width="65%">
-						<input type="text" class="input-sm" id="id" size=15>
+						<input type="text" class="input-sm" id="id" size=15 value="${id }">
 					</td>
 				</tr>
 				<tr>
@@ -69,7 +70,7 @@ $(function(){
 				<tr>
 					<!-- 자동 로그인 체크 영역 -->
 					<td colspan="2">
-						<input type="checkbox" id="ck" value="true">로그인 상태 유지
+						<input type="checkbox" id="ck">아이디 저장
 					</td>
 				</tr>
 				<tr>

@@ -3,6 +3,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import doo.doo.vo.*;
 
@@ -24,6 +25,29 @@ public interface MemberMapper {
 	
 	
 	//회원 수정 ==> 복호화
+	@Select("SELECT pwd FROM spring_join WHERE id=#{id}")
+	public String memberGetPassword(String id);
 	
+	@Select("SELECT * FROM spring_join WHERE id=#{id}")
+	public MemberVO memberUpdateData(String id);
 	
+	/*
+	 * private String id;
+	private String pwd;
+	private String name;
+	private String sex;
+	private String birthday;
+	private String email;
+	private String post;
+	private String addr1;
+	private String addr2;
+	private String tel, tel1, tel2;
+	private String content;
+	private String sessionId;
+	private String role;
+	private Date limited;
+	 */
+	@Update("UPDATE spring_join SET name=#{name}, sex=#{sex}, email=#{email}, post=#{post}, addr1=#{addr1},"
+			+ "addr2=#{addr2}, tel=#{tel}, content=#{content} WHERE id=#{id}")
+	public void memberUpdate(MemberVO vo);
 }

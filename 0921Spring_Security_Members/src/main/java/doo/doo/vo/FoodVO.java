@@ -8,6 +8,5 @@ import lombok.Setter;
 public class FoodVO {
 	private int fno, cno;
 	private double score;
-	private String name, address, tel;
-	private String id, msg, type, price, time, parking, menu, poster;
+	private String name, address, tel, type, price, time, parking, menu, poster, rday, id, msg;
 }

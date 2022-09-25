@@ -17,8 +17,8 @@
 	      <li class="active"><a href="../main/main.do">Home</a></li>
 	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">레시피 <span class="caret"></span></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#">레시피 목록</a></li>
-	          <li><a href="#">쉐프</a></li>
+	          <li><a href="../recipe/list.do">레시피 목록</a></li>
+	          <li><a href="../recipe/chef_list.do">쉐프</a></li>
 	          <li><a href="#">레시피 만들기</a></li>
 	        </ul>
 	      </li>
@@ -36,7 +36,7 @@
 	      		<li><a href="../member/login.do"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	    	</c:if>
 	    	<c:if test="${sessionScope.id!=null }">
-	    		<li><a href="../member/join_update.do"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
+	    		<li><a href="../member/join_before.do"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
 	      		<li><a href="../member/logout.do"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	    	</c:if>
 	    </ul>
