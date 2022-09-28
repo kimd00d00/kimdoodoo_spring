@@ -26,6 +26,11 @@ public class BoardDAO {
 		return mapper.boardListData(map);
 	}
 	
+	/*@Select("SELECT COUNT(*) FROM goods_board")*/
+	public int boardRowCount() {
+		return mapper.boardRowCount();
+	}
+	
 	/*@Insert("INSERT INTO goods_board(no, name, subject, content, pwd) VALUES ("
 			+ "(SELECT NVL(MAX(no)+1,1) FROM goods_board),"
 			+ "#{name},#{subject},#{content},#{pwd})")*/
@@ -42,5 +47,22 @@ public class BoardDAO {
 	public BoardVO boardDetailData(int no) {
 		mapper.hitIncrement(no);
 		return mapper.boardDetailData(no);
+	}
+	
+	/*@Select("SELECT no, subject, num "
+			+ "FROM (SELECT no, subject, rownum as num "
+			+ "FROM (SELECT no, subject "
+			+ "FROM goods_board ORDER BY no DESC)) "
+			+ "WHERE num=#{num}")*/
+	public BoardVO boardPNData(int num) { //prev, next Data
+		return mapper.boardPNData(num);
+	}
+	
+	/*@Select("SELECT no, subject, hit, rownum "
+			+ "FROM (SELECT no, subject, hit "
+			+ "FROM goods_board ORDER BY hit DESC) "
+			+ "WHERE rownum<=5")*/
+	public List<BoardVO> boardFooterData(){
+		return mapper.boardFooterData();
 	}
 }

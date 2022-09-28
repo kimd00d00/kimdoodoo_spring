@@ -22,6 +22,8 @@ public class GoodsAspect {
 	private NewsManager mgr;
 	@Autowired
 	private GoodsDAO dao;
+	@Autowired
+	private BoardDAO bDao;
 	
 	@Before("execution(* doo.doo.web.*Controller.*(..))")
 	public void footer() {
@@ -41,6 +43,7 @@ public class GoodsAspect {
 			}
 			request.setAttribute("newsList", nList);
 			
+			//조회수 높은 제품 목록
 			List<GoodsVO> footerList = dao.goodsFooterData();
 			for(GoodsVO vo:footerList) {
 				String name = vo.getGoods_name();
@@ -51,6 +54,18 @@ public class GoodsAspect {
 				vo.setGoods_name(name);
 			}
 			request.setAttribute("footerList", footerList);
+			
+			//조회수 높은 게시글 목록
+			List<BoardVO> boardFooterList = bDao.boardFooterData();
+			for(BoardVO vo:boardFooterList) {
+				String sub = vo.getSubject();
+				if(sub.length()>13) {
+					sub = sub.substring(0,13)+"...";
+					vo.setSubject(sub);
+				}
+				vo.setSubject(sub);
+			}
+			request.setAttribute("boardFooterList", boardFooterList);
 		}catch(Exception ex) {}
 	}
 }

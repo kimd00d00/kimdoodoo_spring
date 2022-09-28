@@ -16,13 +16,23 @@ public class BoardController {
 	private BoardDAO dao;
 	
 	@GetMapping("board/list.do")
-	public String board_list(Model model) {
+	public String board_list(String page, Model model) {
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
 		Map map = new HashMap();
-		int start = 0;
-		map.put("start","");
-		map.put("end","");
+		int rowsize = 10;
+		int start = rowsize*curpage-(rowsize-1);
+		int end = rowsize*curpage;
+		
+		map.put("start",start);
+		map.put("end",end);
 		List<BoardVO> list = dao.boardListData(map);
-		model.addAttribute("list","");
+		int totalpage = (int)(Math.ceil(dao.boardRowCount()/10.0));
+		
+		model.addAttribute("curPage",curpage);
+		model.addAttribute("totalPage",totalpage);
+		model.addAttribute("list",list);
 		model.addAttribute("main_jsp","../board/list.jsp");
 		return "main/main";
 	}
@@ -41,7 +51,29 @@ public class BoardController {
 	
 	@GetMapping("board/detail.do")
 	public String board_detail(int no, Model model) {
+		BoardVO vo = dao.boardDetailData(no);
+		int num = vo.getNum();
+		BoardVO prevVO = new BoardVO();
+		BoardVO nextVO = new BoardVO();
 		
+		int count = dao.boardRowCount();
+		if(vo.getNum()==1) { //가장 최근 글
+			prevVO.setSubject("");
+			prevVO.setNo(0);
+		}else {
+			prevVO = dao.boardPNData(num-1);
+		}
+		if(vo.getNum()==count) { //가장 오래된 글
+			nextVO.setSubject("");
+			nextVO.setNo(0);
+		}else {
+			nextVO = dao.boardPNData(num+1);
+		}
+		
+		model.addAttribute("prevVO",prevVO);
+		model.addAttribute("nextVO",nextVO);
+		
+		model.addAttribute("vo",vo);
 		model.addAttribute("main_jsp","../board/detail.jsp");
 		return "main/main";
 	}
