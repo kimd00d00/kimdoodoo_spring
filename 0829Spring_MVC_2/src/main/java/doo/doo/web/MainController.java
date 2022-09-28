@@ -34,6 +34,6 @@ public class MainController {
 	//405 에러 - 허용하지 않는 메서드
 	public String main_output1(String id, String pwd, Model model) {
 		
-		return "main/output1";
+		return "main/output";
 	}
 }

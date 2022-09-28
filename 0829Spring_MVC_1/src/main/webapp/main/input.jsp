@@ -31,7 +31,7 @@
 					<tr>
 						<td class="text-right" width="20%">성별</td>
 						<td width=80%>
-							<input type=radio name=sex value="냄저" checked>냄저
+							<input type=radio name=sex value="남자" checked>남자
 							<input type=radio name=sex value="여자" checked>여자
 						</td>
 					</tr>

@@ -13,7 +13,7 @@
 	지역:${vo.loc }<br>
 	<c:if test="${vo.hobby!=null }">
 		<c:forEach var="ho" items="${vo.hobby}">
-			<li>${vo.hobby }</li>
+			<li>${ho }</li>
 		</c:forEach>
 	</c:if>
 	<c:if test="${vo.hobby==null }">
