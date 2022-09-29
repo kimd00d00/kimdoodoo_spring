@@ -60,6 +60,7 @@
       </table>
     </div>
     <div class="col-sm-5">
+       ID:{{id}}
       <div id="map" style="width:100%;height:350px;"></div>
     </div>
   </div>
@@ -70,9 +71,11 @@
 	   data:{
 		   fno:${fno},
 		   food_detail:{},
-		   won:10000
+		   won:10000,
+		   id:''
 	   },
 	   created:function(){
+		   
 		   if(window.kakao && window.kakao.maps)
 		   {
 			  this.initMap();   
@@ -94,24 +97,19 @@
 		   }).then(function(result){
 			   console.log(result.data)
 			   _this.food_detail=result.data
+			   _this.id=window.sessionStorage.getItem("id") 
+			   
 		   })
 		   
 		   
-		   
-		   //kakao.maps.load(this.initMap)
 	   },
-	   filters:{
-		   currency: function(value){ // 금액 3자리 수 마다 따옴표 필터
-               let num = new Number(value);
-               return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-           }
-	   },
+	  
 	   methods:{
 		   addScript:function() {
 			      const script = document.createElement('script');
-			        /* global kakao */
+			      /* global kakao*/
 			        script.onload = () => kakao.maps.load(this.initMap);
-			        script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=063a056828484c8e1337656cc6cbc882&libraries=services';
+			        script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?appkey=063a056828484c8e1337656cc6cbc882&libraries=services';
 			        document.head.appendChild(script);
 			    },
 		   initMap:function(){
@@ -119,7 +117,7 @@
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
-				        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+				         center: new kakao.maps.LatLng(33.450701, 126.570667),  // 지도의 중심좌표
 				        level: 3 // 지도의 확대 레벨
 				    };  
 				
@@ -127,6 +125,7 @@
 				var map = new kakao.maps.Map(mapContainer, mapOption); 
 				
 				// 주소-좌표 변환 객체를 생성합니다
+				/* global kakao */
 				var geocoder = new kakao.maps.services.Geocoder();
 				
 				// 주소로 좌표를 검색합니다
@@ -145,7 +144,7 @@
 				
 				        // 인포윈도우로 장소에 대한 설명을 표시합니다
 				        var infowindow = new kakao.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+this.food_detail.name+'</div>'
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">{{this.food_detail.name}}</div>'
 				        });
 				        infowindow.open(map, marker);
 				
