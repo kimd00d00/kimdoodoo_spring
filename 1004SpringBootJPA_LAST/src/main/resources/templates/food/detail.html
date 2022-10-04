@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<table class="table">
+				<tr>
+					<td class="text-center" th:each="poster:${list}">
+						<img th:src="${poster}" style="width:100%">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div style="height:20px"></div>
+		<div class="col-sm-8">
+			<table class="table">
+				<tr>
+					<td colspan="2">
+						<b><span th:text="${vo.name}" style="font-size:18px"></span>&nbsp;
+						<span th:text="${vo.score" style="font-size:18px; color:orange"></span></b>
+					</td>
+				</tr>
+				<tr>
+					<td width="20%">주소</td>
+					<td width="80%" th:text="${vo.address}"></td>
+				</tr>
+				<tr>
+					<td width="20%">전화</td>
+					<td width="80%" th:text="${vo.tel}"></td>
+				</tr>
+				<tr>
+					<td width="20%">음식종류</td>
+					<td width="80%" th:text="${vo.type}"></td>
+				</tr>
+				<tr>
+					<td width="20%">가격대</td>
+					<td width="80%" th:text="${vo.price}"></td>
+				</tr>
+				<tr>
+					<td width="20%">영업시간</td>
+					<td width="80%" th:text="${vo.time}"></td>
+				</tr>
+				<tr>
+					<td width="20%">주차</td>
+					<td width="80%" th:text="${vo.parking}"></td>
+				</tr>
+				<tr>
+					<td width="20%">메뉴</td>
+					<td width="80%" th:text="${vo.menu}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			
+		</div>
+	</div>
+</body>
+</html>
